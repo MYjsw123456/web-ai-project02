@@ -127,4 +127,12 @@ public class EmpServiceImpl implements EmpService {
             empExprMapper.insertBatch(exprList);
         }
     }
+
+    /**
+     * 查询全部员工（班主任下拉选项）
+     */
+    @Override
+    public List<Emp1> findAll() {
+        return empMapper.findAll();
+    }
 }

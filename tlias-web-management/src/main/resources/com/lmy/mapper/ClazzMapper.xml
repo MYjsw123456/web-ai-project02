@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmy.mapper.ClazzMapper">
+    <update id="updateClazz">
+        update clazz
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="room != null and room != ''">
+                room = #{room},
+            </if>
+            <if test="beginDate != null">
+                begin_date = #{beginDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="masterId != null">
+                master_id = #{masterId},
+            </if>
+            <if test="subject != null">
+                subject = #{subject},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="getClazz" resultType="com.lmy.pojo.Clazz">
+        select c.*, e.name 'masterName',
+        case
+            when c.begin_date &gt; CURDATE() then '未开班'
+            when c.end_date &lt; CURDATE() then '已结课'
+            else '在读'
+        end 'status'
+        from clazz c left join emp e on c.master_id = e.id
+    <where>
+        <if test="name != null and name != ''">
+            c.name like CONCAT('%', #{name}, '%')
+        </if>
+        <if test="begin != null and begin != ''">
+            and c.begin_date &lt;= #{begin}
+        </if>
+        <if test="end != null and end != ''">
+            and c.end_date &gt;= #{end}
+        </if>
+    </where>
+    order by c.update_time desc
+    </select>
+</mapper>
+

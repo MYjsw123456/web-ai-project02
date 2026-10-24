@@ -54,6 +54,16 @@ public class EmpController {
     }
 
     /**
+     * 查询全部员工（班主任下拉选项）
+     */
+    @GetMapping("/list")
+    public Result list(){
+        log.info("查询全部员工");
+        List<Emp1> list = empService.findAll();
+        return Result.success(list);
+    }
+
+    /**
      * 根据id查询回显员工信息
      */
     @GetMapping("{id}")
