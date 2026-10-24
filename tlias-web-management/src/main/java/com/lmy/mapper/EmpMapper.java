@@ -40,6 +40,18 @@ public interface EmpMapper {
     @Select("select * from emp where id = #{id}")
     Emp1 getEmpById(Integer id);
 
+    /**
+     * 查询全部员工（仅 id、姓名，用于班主任下拉选项）
+     */
+    @Select("select id, name from emp")
+    List<Emp1> findAll();
+
+    /**
+     * 统计指定部门下的员工数量
+     */
+    @Select("select count(*) from emp where dept_id = #{deptId}")
+    Long countByDeptId(Integer deptId);
+
     void putEmp(Emp1 emp1);
 
     List<Map<String,Object>> countEmpJob();

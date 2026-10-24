@@ -1,5 +1,6 @@
 package com.lmy.controller;
 
+import com.lmy.pojo.ClazzOption;
 import com.lmy.pojo.JobOption;
 import com.lmy.pojo.Result;
 import com.lmy.service.ReportService;
@@ -36,6 +37,31 @@ public class ReportController {
         List<Map<String,Object>> list = reportService.getEmpGender();
 
         return Result.success(list);
+
+    }
+    /**
+     * 统计学员的学历信息
+     */
+    @GetMapping("/studentDegreeData")
+    public Result getStudentDegreeData(){
+
+        log.info("统计学员的学历信息");
+        List<Map<String,Object>> list = reportService.getStudentDegreeData();
+
+        return Result.success(list);
+
+    }
+
+    /**
+     * 统计每个班的人数
+     */
+    @GetMapping("/studentCountData")
+    public Result getStudentCountData(){
+
+        log.info("统计每个班的人数");
+        ClazzOption clazzOption = reportService.getStudentCountData();
+
+        return Result.success(clazzOption);
 
     }
 

@@ -16,5 +16,10 @@ public interface EmpService {
 
     Emp1 getEmpById(Integer id);
 
-     void putEmp(Emp1 emp1);
+    void putEmp(Emp1 emp1);
+
+    /**
+     * 查询全部员工（班主任下拉选项）
+     */
+    List<Emp1> findAll();
 }

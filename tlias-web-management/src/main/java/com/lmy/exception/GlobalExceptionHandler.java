@@ -26,4 +26,13 @@ public class GlobalExceptionHandler {
         String[] arr = errMsg.split(" ");
         return Result.error(arr[2]+"已存在");
     }
+
+    /**
+     * 业务异常：将校验失败的提示信息原返回给前端
+     */
+    @ExceptionHandler
+    public Result handlerBusinessException(BusinessException e){
+        log.info("业务校验失败：{}", e.getMessage());
+        return Result.error(e.getMessage());
+    }
 }
