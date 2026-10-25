@@ -8,6 +8,7 @@ import com.lmy.mapper.EmpMapper;
 import com.lmy.pojo.*;
 import com.lmy.service.EmpLogService;
 import com.lmy.service.EmpService;
+import com.lmy.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +16,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -134,5 +133,25 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public List<Emp1> findAll() {
         return empMapper.findAll();
+    }
+
+    /**
+     * 登录方法
+     */
+    @Override
+    public LoginInfo login(Emp1 emp) {
+
+        LoginInfo l = empMapper.getEmpByUsernameAndPassword(emp);
+
+        if(l != null){
+            //生成jwt令牌
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", l.getId());
+            claims.put("username", l.getUsername());
+            String token = JwtUtils.generateToken(claims);
+            l.setToken(token);
+            return l;
+        }
+        return null;
     }
 }

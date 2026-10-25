@@ -2,6 +2,7 @@ package com.lmy.service;
 
 import com.lmy.pojo.Emp1;
 import com.lmy.pojo.EmpQueryParam;
+import com.lmy.pojo.LoginInfo;
 import com.lmy.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -22,4 +23,9 @@ public interface EmpService {
      * 查询全部员工（班主任下拉选项）
      */
     List<Emp1> findAll();
+
+    /**
+     * 登录方法
+     */
+    LoginInfo login(Emp1 emp);
 }

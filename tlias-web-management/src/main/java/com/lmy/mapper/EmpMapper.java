@@ -2,6 +2,7 @@ package com.lmy.mapper;
 
 import com.lmy.pojo.Emp1;
 import com.lmy.pojo.EmpQueryParam;
+import com.lmy.pojo.LoginInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
@@ -57,4 +58,10 @@ public interface EmpMapper {
     List<Map<String,Object>> countEmpJob();
 
     List<Map<String,Object>> countEmpGender();
+
+    /**
+     * 根据用户名和密码查询员工信息
+     */
+    @Select("select id,username,name from emp where username = #{username} and password = #{password}")
+    LoginInfo getEmpByUsernameAndPassword(Emp1 emp);
 }
