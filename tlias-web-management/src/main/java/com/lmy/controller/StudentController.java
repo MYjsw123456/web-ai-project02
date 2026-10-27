@@ -1,5 +1,6 @@
 package com.lmy.controller;
 
+import com.lmy.anno.Log;
 import com.lmy.pojo.PageResult;
 import com.lmy.pojo.Result;
 import com.lmy.pojo.Student;
@@ -31,6 +32,7 @@ public class StudentController {
     /**
      * 新增学员
      */
+    @Log
     @PostMapping
     public Result addStudent(@RequestBody Student student) {
         log.info("请求参数：{}", student);
@@ -40,6 +42,7 @@ public class StudentController {
     /**
      * 删除学员（支持单个和批量删除，多个id以逗号分隔）
      */
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("删除学员：{}", ids);
@@ -58,6 +61,7 @@ public class StudentController {
     /**
      * 修改学员
      */
+    @Log
     @PutMapping
     public Result updateStudent(@RequestBody Student student) {
         log.info("请求参数：{}", student);
@@ -67,6 +71,7 @@ public class StudentController {
     /**
      * 学员违纪处理
      */
+    @Log
     @PutMapping("/violation/{id}/{score}")
     public Result violation(@PathVariable Integer id, @PathVariable Integer score) {
         log.info("请求参数：{}, {}", id, score);

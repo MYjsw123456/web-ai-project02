@@ -1,5 +1,6 @@
 package com.lmy.controller;
 
+import com.lmy.anno.Log;
 import com.lmy.pojo.Dept;
 import com.lmy.pojo.Result;
 import com.lmy.service.DeptService;
@@ -58,6 +59,7 @@ public class DeptController {
     }*/
 
     //方式三：省略@RequestParam注解（前端传递的请求参数名和后端方法形参名一样）
+    @Log
     @DeleteMapping("/depts")
     public  Result deleteById(Integer id){
         log.info("根据id删除部门：{}",id);
@@ -68,6 +70,7 @@ public class DeptController {
     /**
      * 新增部门
      */
+    @Log
     @PostMapping("/depts")
     public Result addDept(@RequestBody Dept dept){
 
@@ -90,6 +93,7 @@ public class DeptController {
     /**
      * 修改部门
      */
+    @Log
     @PutMapping("/depts")
     public Result putDept(@RequestBody Dept dept){
 

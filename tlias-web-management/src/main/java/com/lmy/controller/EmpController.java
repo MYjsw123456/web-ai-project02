@@ -1,6 +1,7 @@
 package com.lmy.controller;
 
 
+import com.lmy.anno.Log;
 import com.lmy.pojo.Emp1;
 import com.lmy.pojo.EmpQueryParam;
 import com.lmy.pojo.PageResult;
@@ -35,6 +36,7 @@ public class EmpController {
         return Result.success(pageResult);
     }
 
+    @Log
     @PostMapping
     public Result save(@RequestBody Emp1 emp1){
         log.info("保存员工信息：{}",emp1);
@@ -45,6 +47,7 @@ public class EmpController {
     /**
      * 批量删除员工信息
      */
+    @Log
     @DeleteMapping()
     public Result delete(@RequestParam List<Integer> ids){
         log.info("删除员工：{}",ids);
@@ -77,6 +80,7 @@ public class EmpController {
     /**
      * 修改员工信息
      */
+    @Log
     @PutMapping
     public Result putEmp(@RequestBody Emp1 emp1){
         log.info("修改员工信息：{}",emp1);

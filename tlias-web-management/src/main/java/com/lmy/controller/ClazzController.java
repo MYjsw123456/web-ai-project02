@@ -1,5 +1,6 @@
 package com.lmy.controller;
 
+import com.lmy.anno.Log;
 import com.lmy.pojo.Clazz;
 import com.lmy.pojo.ClazzQueryParam;
 import com.lmy.pojo.PageResult;
@@ -35,6 +36,7 @@ public class ClazzController {
     /**
      * 添加班级
      */
+    @Log
     @PostMapping
     public Result addClazz(@RequestBody Clazz clazz) {
         log.info("请求参数：{}", clazz);
@@ -46,6 +48,7 @@ public class ClazzController {
     /**
      * 根据id删除班级
      */
+    @Log
     @DeleteMapping("/{id}")
     public Result deleteClazz(@PathVariable("id") Integer id) {
         log.info("请求参数：{}", id);
@@ -64,6 +67,7 @@ public class ClazzController {
     /**
      * 更新班级
      */
+    @Log
     @PutMapping
     public Result updateClazz(@RequestBody Clazz clazz) {
         log.info("请求参数：{}", clazz);

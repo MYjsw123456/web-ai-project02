@@ -1,11 +1,15 @@
 package com.lmy.interceptor;
 
+import com.lmy.utils.CurrentHolder;
 import com.lmy.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Component
@@ -30,7 +34,9 @@ public class TokenInterceptor implements HandlerInterceptor {
         }
         //5.如果token存在，校验token的合法性，如果不合法，返回错误信息（状态码401）
         try {
-            JwtUtils.parserToken(token);
+            Claims claims = JwtUtils.parserToken(token);
+            Integer id = Integer.valueOf(claims.getId().toString());
+            CurrentHolder.setCurrentId(id);
         } catch (Exception e) {
             log.info("令牌不合法，返回错误信息（状态码401）");
             response.setStatus(401);
@@ -39,5 +45,11 @@ public class TokenInterceptor implements HandlerInterceptor {
         //6.如果token存在且合法，放行
         log.info("令牌存在且合法，放行");
         return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
+        //删除ThreadLocal中的信息
+        CurrentHolder.remove();
     }
 }
