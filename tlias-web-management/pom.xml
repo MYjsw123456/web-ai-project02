@@ -79,6 +79,11 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
+        <!-- AOP起步依赖（Spring Boot 4 起改名为 spring-boot-starter-aspectj） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aspectj</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
